@@ -19,9 +19,6 @@ public class FunctionalInterfacesDemo {
 		//understanding INTERFACE.super.METHOD syntax
 		new Child().hasMoney();
 		
-		//
-		new Child().hasMoney();
-		
 	}
 
 	private void getGoal(Dad dad) {
@@ -47,9 +44,9 @@ class  Child implements Dad, Mom {
 	@Override
 	public void hasMoney() {
 		Dad.super.hasMoney();
+		Dad.hasHouse();
 		Mom.super.hasMoney();
 		Mom.hasHouse();
-		Dad.hasHouse();
 	}
 
 } 
