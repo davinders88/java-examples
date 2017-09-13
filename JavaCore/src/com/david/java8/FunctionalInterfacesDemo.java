@@ -1,7 +1,11 @@
 package com.david.java8;
 
-//functional interface, default methods and static methods in interface.
-//INTERFACE.super.METHOD syntax demo
+/**
+ * @FunctionalInterface, default methods and static methods in interface.
+ * INTERFACE.super.METHOD syntax demo
+ * @author devgosain
+ *
+ */
 public class FunctionalInterfacesDemo {
 
 	public static void main(String[] args) {
