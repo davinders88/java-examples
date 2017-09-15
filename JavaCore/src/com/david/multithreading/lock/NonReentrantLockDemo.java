@@ -1,6 +1,7 @@
 package com.david.multithreading.lock;
  
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Even the same thread cann't re-acquire the lock. 
@@ -26,28 +27,43 @@ public class NonReentrantLockDemo {
 		new Thread(() -> {
 			nRLD.print(nRLD.semaphore, 3);
 		}).start();
-
+		
+		new Thread(() -> {
+			nRLD.print(nRLD.semaphore, 4);
+		}).start();
+		
+		new Thread(() -> {
+			nRLD.print(nRLD.semaphore, 5);
+		}).start();
 	}
 
 	private void print(Semaphore wLock, int i) {
+		boolean acquired = false;
 		try {
-			wLock.acquire();
-			System.out.println("Write Accuired " + i);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println("Write done " + i);
+			acquired = wLock.tryAcquire(1, TimeUnit.SECONDS);
 			
-			//will block infinitely if a thread try to re-acquire the lock it already has
-			//print(wLock, i); 
+			if (acquired) {
+				System.out.println("Write Accuired " + i);
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Write done " + i);
+				
+				//will block infinitely if a thread try to re-acquire the lock it already has
+				//print(wLock, i); 
+			}
 			
 		} catch (InterruptedException e1) {
 		} finally {
-			wLock.release();
+			if (acquired) {
+				System.out.println("Releasing " + i);
+				wLock.release();
+			}
 		}
 
 	}
+	
 
 }
