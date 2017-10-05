@@ -23,7 +23,7 @@ final class Immutability {
 	public Immutability (String name,  Map<String, String> map) {
 		this.name = name;
 		this.map = getCopy(map);
-		//this.map = map; this will break immutability
+		//this.map = map;
 	}
 
 	private Map<String, String> getCopy(Map<String, String> map2) {
