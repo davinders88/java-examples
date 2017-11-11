@@ -16,8 +16,8 @@ public class BasicDemo {
 		
 		//can add with super bound
 		List<? super Integer> list1 = Arrays.asList(1, 2, 3);
-//		list1.add(1);// add is allowed but giving exception at run time.
-//		list1.add(1);
+		//list1.add(1);// add is allowed but giving exception at run time.
+		//list1.add(1);
 		System.out.println(list1);
 		
 		List<Object> listOfObjects = new ArrayList<>();

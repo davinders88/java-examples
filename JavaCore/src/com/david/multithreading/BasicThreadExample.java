@@ -12,11 +12,11 @@ public class BasicThreadExample {
 	
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
-		mainAndChildThreadsHW();
-		mainAndChildThreadsUsingThreadPool_Runnable();
-		mainAndChildThreadsUsingThreadPool_Callable();
+		//mainAndChildThreadsHW();
+	//	mainAndChildThreadsUsingThreadPool_Runnable();
+		//mainAndChildThreadsUsingThreadPool_Callable();
 		mainAndChildThreadsUsingThreadPool_CompleatableFuture();
-		compleatableFuture_UsingLatchToWaitForTasksToComplelet();
+	//	compleatableFuture_UsingLatchToWaitForTasksToComplelet();
 	}
 	
 	private static void compleatableFuture_UsingLatchToWaitForTasksToComplelet() throws InterruptedException {
@@ -54,21 +54,21 @@ public class BasicThreadExample {
 		CompletableFuture.supplyAsync(() -> {
 			System.out.println("compfuture async task : " + Thread.currentThread().getName());
 			try {
-				Thread.sleep(500);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			return "Child thread COMP_FUTURE : " + Thread.currentThread().getName();
 		},pool).thenAccept((t) -> {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {	}
 			System.out.println(t + " Then accept Called");
 		});
 		
 		System.out.println("Parent thread : " + Thread.currentThread().getName());
 		pool.shutdown();
-		pool.awaitTermination(2, TimeUnit.SECONDS);
+		pool.awaitTermination(1, TimeUnit.SECONDS);
 		System.out.println("=================================================================");
 		
 	}
